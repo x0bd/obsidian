@@ -14,13 +14,13 @@
 }
 
 /* ─── Layout Grid ───────────────────────────────────────────────
-   Columns: [left] 270px │ [centre] 1fr │ [right] 300px
-   Rows:    [topbar] 52px │ [main] 1fr │ [bottom] 210px │ [log] 140px
+   Columns: [left] 300px │ [centre] 1fr │ [right] 360px
+   Rows:    [topbar] 58px │ [main] 1fr │ [bottom] 240px │ [log] 160px
 ──────────────────────────────────────────────────────────────── */
 .obs-grid {
   display: grid;
-  grid-template-columns: 270px 1fr 300px;
-  grid-template-rows: 52px 1fr 210px 140px;
+  grid-template-columns: 300px 1fr 360px;
+  grid-template-rows: 58px 1fr 240px 160px;
   gap: 6px;
   padding: 6px;
   height: 100%;
