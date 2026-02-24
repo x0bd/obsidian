@@ -10,7 +10,7 @@
   height: 100vh;
   overflow: hidden;
   position: relative;
-  background-color: var(--void);
+  background-color: var(--bg);
 }
 
 /* ─── Layout Grid ───────────────────────────────────────────────

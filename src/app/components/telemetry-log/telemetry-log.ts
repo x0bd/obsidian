@@ -12,13 +12,13 @@ export class TelemetryLog {
   protected levelColor(level: string): string {
     switch (level) {
       case 'EXEC':
-        return 'var(--cyber)';
+        return 'var(--positive)';
       case 'WARN':
-        return 'var(--burn)';
+        return 'var(--accent)';
       case 'SYS':
-        return '#888';
+        return 'var(--blue)';
       default:
-        return 'var(--text-dim)';
+        return 'var(--text-3)';
     }
   }
 

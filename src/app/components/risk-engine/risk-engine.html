@@ -1,66 +1,52 @@
 <!-- RISK ENGINE -->
 <div class="obs-panel obs-risk" role="region" aria-label="Risk engine">
-  <div class="hazard-stripe" aria-hidden="true"></div>
   <div class="obs-panel-header">
-    <span class="panel-label">Risk Engine</span>
+    <span class="obs-panel-title">Risk</span>
   </div>
 
   <div class="obs-risk__body">
-    <!-- Margin Usage -->
     <div class="obs-risk__metric">
       <div class="obs-risk__metric-row">
-        <span class="text-dead">MARGIN USAGE</span>
-        <span class="font-mono" [style.color]="marginWarning() ? 'var(--burn)' : 'var(--text)'">{{
-          marginLabel()
-        }}</span>
+        <span class="label">Margin Usage</span>
+        <span class="num-sm" [style.color]="marginWarning() ? 'var(--negative)' : 'var(--text-1)'">{{ marginLabel() }}</span>
       </div>
       <div
-        class="obs-progress-track"
+        class="obs-progress"
         role="progressbar"
         [attr.aria-valuenow]="svc.marginPct()"
         aria-valuemin="0"
         aria-valuemax="100"
       >
         <div
-          class="obs-progress-fill"
+          class="obs-progress__fill"
           [style.width]="marginLabel()"
-          [style.background]="marginWarning() ? 'var(--burn)' : 'var(--cyber)'"
+          [style.background]="marginWarning() ? 'var(--negative)' : 'var(--positive)'"
         ></div>
       </div>
     </div>
 
-    <!-- Leverage -->
     <div class="obs-risk__metric">
       <div class="obs-risk__metric-row">
-        <span class="text-dead">LEVERAGE</span>
-        <span class="font-mono text-cyber">10x</span>
+        <span class="label">Leverage</span>
+        <span class="num-sm">10x</span>
       </div>
-      <div
-        class="obs-progress-track"
-        role="progressbar"
-        aria-valuenow="25"
-        aria-valuemin="0"
-        aria-valuemax="100"
-      >
-        <div class="obs-progress-fill" style="width: 25%; background: var(--burn)"></div>
+      <div class="obs-progress" role="progressbar" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">
+        <div class="obs-progress__fill" style="width:25%;background:var(--accent)"></div>
       </div>
     </div>
 
-    <!-- Divider -->
     <div class="obs-risk__divider"></div>
 
-    <!-- Equity -->
     <div class="obs-risk__equity">
-      <span class="text-dead">ACCOUNT EQUITY</span>
-      <span class="font-mono glow-cyber">{{ equityLabel() }}</span>
+      <span class="label">Account Equity</span>
+      <span class="obs-risk__equity-value">{{ equityLabel() }}</span>
     </div>
 
-    <!-- Volatility warning -->
     <div class="obs-risk__footer">
       @if (marginWarning()) {
-        <div class="vol-warning" role="alert">⚠ MARGIN WARNING</div>
+        <div class="obs-vol-pill" role="alert">Margin Warning</div>
       } @else {
-        <div class="vol-warning" role="status">VOLATILITY WARNING</div>
+        <div class="obs-vol-pill obs-vol-pill--warn" role="status">High Volatility</div>
       }
     </div>
   </div>

@@ -1,64 +1,65 @@
 <!-- ORDER BOOK -->
 <div class="obs-panel obs-ob" role="region" aria-label="Order book">
   <div class="obs-panel-header">
-    <span class="panel-label">Order Book</span>
-    <span class="text-dead" style="font-size: 9px">L2 DATA</span>
+    <span class="obs-panel-title">Order Book</span>
+    <span class="label">L2</span>
   </div>
 
-  <!-- Asks (sell side — shown reverse) -->
+  <div class="obs-ob__col-header" aria-hidden="true">
+    <span>Price</span><span>Size</span><span>Total</span>
+  </div>
+
   <div class="obs-ob__side obs-ob__side--asks" aria-label="Ask orders">
-    <div class="obs-ob__col-header" aria-hidden="true">
-      <span>PRICE</span><span>SIZE</span><span>TOTAL</span>
-    </div>
-    @for (row of svc.asks(); track row.price; let i = $index) {
-      <div class="obs-ob__row obs-ob__row--ask" [attr.aria-label]="'Ask ' + row.price">
-        <span class="obs-ob__price text-burn">{{ row.price }}</span>
+    @for (row of svc.asks(); track row.price) {
+      <div class="obs-ob__row" [attr.aria-label]="'Ask ' + row.price">
+        <span class="obs-ob__price" style="color: var(--negative)">{{ row.price }}</span>
         <span class="obs-ob__size">{{ row.size }}</span>
         <span class="obs-ob__total">{{ row.total }}</span>
         <div
           class="depth-bar"
           aria-hidden="true"
           [style.width.%]="row.depthPct"
-          style="background: var(--burn)"
+          style="background: var(--negative)"
         ></div>
       </div>
     }
   </div>
 
-  <!-- Spread -->
-  <div class="obs-ob__spread" aria-label="Spread">SPREAD 1.0</div>
+  <div class="obs-ob__spread" aria-label="Spread">1.0 spread</div>
 
-  <!-- Bids (buy side) -->
   <div class="obs-ob__side obs-ob__side--bids" aria-label="Bid orders">
     @for (row of svc.bids(); track row.price) {
-      <div class="obs-ob__row obs-ob__row--bid" [attr.aria-label]="'Bid ' + row.price">
-        <span class="obs-ob__price text-cyber">{{ row.price }}</span>
+      <div class="obs-ob__row" [attr.aria-label]="'Bid ' + row.price">
+        <span class="obs-ob__price" style="color: var(--positive)">{{ row.price }}</span>
         <span class="obs-ob__size">{{ row.size }}</span>
         <span class="obs-ob__total">{{ row.total }}</span>
         <div
           class="depth-bar"
           aria-hidden="true"
           [style.width.%]="row.depthPct"
-          style="background: var(--cyber)"
+          style="background: var(--positive)"
         ></div>
       </div>
     }
   </div>
 
-  <!-- Recent Trades -->
   <div class="obs-ob__trades" role="region" aria-label="Recent trades" aria-live="polite">
-    <div class="obs-panel-header" style="min-height: 28px">
-      <span class="panel-label" style="font-size: 0.65rem">Recent Trades</span>
+    <div class="obs-panel-header" style="min-height: 36px">
+      <span class="obs-panel-title">Trades</span>
     </div>
     @for (t of svc.recentTrades(); track t.id) {
       <div
         class="obs-ob__row obs-ob__row--trade"
         [class.obs-ob__row--whale]="t.isWhale"
-        [attr.aria-label]="(t.isBid ? 'Buy' : 'Sell') + ' trade ' + t.price"
+        [attr.aria-label]="(t.isBid ? 'Buy' : 'Sell') + ' ' + t.price"
       >
-        <span [style.color]="t.isBid ? 'var(--cyber)' : 'var(--burn)'">{{ t.price }}</span>
-        <span>{{ t.size }}</span>
-        <span class="text-dead">{{ t.time }}</span>
+        <span
+          class="obs-ob__price"
+          [style.color]="t.isBid ? 'var(--positive)' : 'var(--negative)'"
+          >{{ t.price }}</span
+        >
+        <span class="obs-ob__size">{{ t.size }}</span>
+        <span class="obs-ob__total">{{ t.time }}</span>
       </div>
     }
   </div>

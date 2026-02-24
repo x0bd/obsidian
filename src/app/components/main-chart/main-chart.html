@@ -4,32 +4,34 @@
   role="region"
   [attr.aria-label]="svc.activeSymbol() + ' chart'"
 >
-  <!-- Header: symbol + OHLC -->
   <div class="obs-panel-header">
-    <span class="panel-label">{{ svc.activeSymbol() }} [1H]</span>
+    <div style="display: flex; align-items: baseline; gap: 12px">
+      <span style="font-size: 0.82rem; font-weight: 600; color: var(--text-1)">{{
+        svc.activeSymbol()
+      }}</span>
+      <span class="obs-panel-title">1H</span>
+    </div>
     <div class="obs-ohlc" aria-label="OHLC data">
-      <span class="text-dead"
-        >O: <span class="text-dim">{{ ohlc().o }}</span></span
-      >
-      <span class="text-dead"
-        >H: <span class="text-dim">{{ ohlc().h }}</span></span
-      >
-      <span class="text-dead"
-        >L: <span class="text-dim">{{ ohlc().l }}</span></span
-      >
-      <span class="text-dead"
-        >C: <span class="glow-cyber text-cyber">{{ ohlc().c }}</span></span
-      >
+      <div class="obs-ohlc-item">
+        <span class="label">O</span>
+        <span class="num-sm">{{ ohlc().o }}</span>
+      </div>
+      <div class="obs-ohlc-item">
+        <span class="label">H</span>
+        <span class="num-sm" style="color: var(--positive)">{{ ohlc().h }}</span>
+      </div>
+      <div class="obs-ohlc-item">
+        <span class="label">L</span>
+        <span class="num-sm" style="color: var(--negative)">{{ ohlc().l }}</span>
+      </div>
+      <div class="obs-ohlc-item">
+        <span class="label">C</span>
+        <span class="num-sm">{{ ohlc().c }}</span>
+      </div>
     </div>
   </div>
 
-  <!-- Grid background + candles -->
   <div class="obs-chart-body" aria-hidden="true">
-    <!-- Crosshair -->
-    <div class="crosshair-h" style="top: 50%"></div>
-    <div class="crosshair-v" style="left: 50%"></div>
-
-    <!-- Candles -->
     <div class="obs-candles">
       @for (c of candles(); track $index) {
         <div
@@ -43,13 +45,19 @@
         </div>
       }
     </div>
-
-    <span class="obs-chart-scan" aria-hidden="true">SCANNING MODULE 04A // ACTIVE</span>
   </div>
 
-  <!-- Action buttons -->
   <div class="obs-chart-actions">
-    <button class="obs-btn" (click)="buy()" aria-label="Buy market order">BUY MKT</button>
-    <button class="obs-btn danger" (click)="sell()" aria-label="Sell market order">SELL MKT</button>
+    <button class="obs-btn obs-btn--buy" (click)="buy()" aria-label="Buy market order">
+      Buy Market
+    </button>
+    <button class="obs-btn obs-btn--sell" (click)="sell()" aria-label="Sell market order">
+      Sell Market
+    </button>
+    <div class="obs-chart-timeframes" aria-label="Timeframes">
+      @for (tf of ['1m', '5m', '15m', '1H', '4H', '1D']; track tf) {
+        <button class="obs-tf-btn" [class.obs-tf-btn--active]="tf === '1H'">{{ tf }}</button>
+      }
+    </div>
   </div>
 </div>

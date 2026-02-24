@@ -17,9 +17,9 @@ export class MarketWatch {
   }
 
   protected pctColor(changePct: number): string {
-    if (changePct > 0) return 'var(--cyber)';
-    if (changePct < 0) return 'var(--burn)';
-    return 'var(--text-dead)';
+    if (changePct > 0) return 'var(--positive)';
+    if (changePct < 0) return 'var(--negative)';
+    return 'var(--text-2)';
   }
 
   protected formatPct(changePct: number): string {
