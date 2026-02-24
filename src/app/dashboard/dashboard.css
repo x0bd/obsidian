@@ -69,12 +69,12 @@
   grid-row: 4;
 }
 
-/* ─── Top Bar ───────────────────────────────────────────────── */
+/* ─── Host element display ─── */
 obs-top-bar {
-  display: contents;
+  display: block;
+  overflow: hidden;
 }
 
-/* ─── Component display fixes ─── */
 obs-market-watch,
 obs-main-chart,
 obs-order-book,

@@ -41,7 +41,7 @@ export class MainChart implements OnInit, OnDestroy {
     const decimals = p < 10 ? 4 : 2;
     const h = (p * 1.0015).toFixed(decimals);
     const l = (p * 0.9985).toFixed(decimals);
-    const o = (p * (1 + (Math.random() - 0.5) * 0.001)).toFixed(decimals);
+    const o = (p * 1.0003).toFixed(decimals);
     return { o, h, l, c: p.toFixed(decimals) };
   });
 

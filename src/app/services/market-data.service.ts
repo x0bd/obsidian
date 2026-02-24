@@ -234,13 +234,17 @@ export class MarketDataService {
   }
 
   private _initTelemetry(): TelemetryEntry[] {
-    const e = (level: TelemetryEntry['level'], message: string): TelemetryEntry =>
-      ({ id: ++_telId, timestamp: nowTime(), level, message });
+    const e = (level: TelemetryEntry['level'], message: string): TelemetryEntry => ({
+      id: ++_telId,
+      timestamp: nowTime(),
+      level,
+      message,
+    });
     return [
-      e('SYS',  'OBSIDIAN.OS v3.1.4 BOOT SEQUENCE COMPLETE'),
-      e('SYS',  'NEURAL FEED ENGINE INITIALISED'),
+      e('SYS', 'OBSIDIAN.OS v3.1.4 BOOT SEQUENCE COMPLETE'),
+      e('SYS', 'NEURAL FEED ENGINE INITIALISED'),
       e('INFO', 'MARKET DATA STREAMS CONNECTED: 6 INSTRUMENTS'),
-      e('SYS',  'RISK ENGINE ONLINE // MARGIN CHECKS ACTIVE'),
+      e('SYS', 'RISK ENGINE ONLINE // MARGIN CHECKS ACTIVE'),
       e('INFO', 'ORDER BOOK DEPTH FEED: L2 READY'),
     ].reverse();
   }
