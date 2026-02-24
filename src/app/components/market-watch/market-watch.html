@@ -1,0 +1,48 @@
+<!-- MARKET WATCH -->
+<div class="obs-panel" style="grid-row: 2 / -1" role="region" aria-label="Market watch">
+  <div class="hazard-stripe" aria-hidden="true"></div>
+  <div class="obs-panel-header">
+    <span class="panel-label">Market Watch</span>
+    <svg
+      aria-hidden="true"
+      width="13"
+      height="13"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="var(--text-dead)"
+      stroke-width="2"
+    >
+      <line x1="4" y1="6" x2="20" y2="6" />
+      <line x1="8" y1="12" x2="20" y2="12" />
+      <line x1="12" y1="18" x2="20" y2="18" />
+    </svg>
+  </div>
+
+  <!-- Instrument list -->
+  <ul class="obs-mw-list" role="listbox" aria-label="Select instrument">
+    @for (inst of svc.instruments(); track inst.symbol) {
+      <li
+        class="obs-mw-row"
+        role="option"
+        [attr.aria-selected]="svc.activeSymbol() === inst.symbol"
+        [class.obs-mw-row--active]="svc.activeSymbol() === inst.symbol"
+        (click)="select(inst)"
+        (keydown.enter)="select(inst)"
+        (keydown.space)="select(inst)"
+        tabindex="0"
+      >
+        <span class="obs-mw-row__sym">{{ inst.symbol }}</span>
+        <span class="obs-mw-row__price">{{ inst.price | number: '1.2-4' }}</span>
+        <span class="obs-mw-row__pct" [style.color]="pctColor(inst.changePct)">{{
+          formatPct(inst.changePct)
+        }}</span>
+      </li>
+    }
+  </ul>
+
+  <!-- System message -->
+  <div class="obs-mw-footer" aria-live="polite">
+    <div class="text-dead" style="font-size: 9px; margin-bottom: 2px">SYSTEM MSG</div>
+    <div class="text-cyber" style="font-size: 0.72rem">WHALE ALERT: 500 BTC MOVED</div>
+  </div>
+</div>

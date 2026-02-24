@@ -1,0 +1,33 @@
+<!-- OBSIDIAN DASHBOARD -->
+<div class="obs-terminal" role="main" aria-label="Obsidian trading terminal">
+  <!-- Toast notification -->
+  @if (svc.toastMessage()) {
+    <div class="obs-toast" role="status" aria-live="assertive" (click)="svc.toastMessage.set(null)">
+      {{ svc.toastMessage() }}
+    </div>
+  }
+
+  <!-- Layout grid -->
+  <div class="obs-grid">
+    <!-- Row 1: Top bar (full width) -->
+    <obs-top-bar class="obs-grid__topbar"></obs-top-bar>
+
+    <!-- Row 2-3: Left — Market watch -->
+    <obs-market-watch class="obs-grid__market-watch"></obs-market-watch>
+
+    <!-- Row 2: Centre — Main chart -->
+    <obs-main-chart class="obs-grid__chart"></obs-main-chart>
+
+    <!-- Row 2: Right — Order book -->
+    <obs-order-book class="obs-grid__order-book"></obs-order-book>
+
+    <!-- Row 3: Centre — Positions -->
+    <obs-positions-panel class="obs-grid__positions"></obs-positions-panel>
+
+    <!-- Row 3: Right — Risk engine -->
+    <obs-risk-engine class="obs-grid__risk"></obs-risk-engine>
+
+    <!-- Row 4: Full width — Telemetry log -->
+    <obs-telemetry-log class="obs-grid__telemetry"></obs-telemetry-log>
+  </div>
+</div>

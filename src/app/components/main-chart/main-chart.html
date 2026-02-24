@@ -1,0 +1,55 @@
+<!-- MAIN CHART -->
+<div
+  class="obs-panel obs-main-chart"
+  role="region"
+  [attr.aria-label]="svc.activeSymbol() + ' chart'"
+>
+  <!-- Header: symbol + OHLC -->
+  <div class="obs-panel-header">
+    <span class="panel-label">{{ svc.activeSymbol() }} [1H]</span>
+    <div class="obs-ohlc" aria-label="OHLC data">
+      <span class="text-dead"
+        >O: <span class="text-dim">{{ ohlc().o }}</span></span
+      >
+      <span class="text-dead"
+        >H: <span class="text-dim">{{ ohlc().h }}</span></span
+      >
+      <span class="text-dead"
+        >L: <span class="text-dim">{{ ohlc().l }}</span></span
+      >
+      <span class="text-dead"
+        >C: <span class="glow-cyber text-cyber">{{ ohlc().c }}</span></span
+      >
+    </div>
+  </div>
+
+  <!-- Grid background + candles -->
+  <div class="obs-chart-body" aria-hidden="true">
+    <!-- Crosshair -->
+    <div class="crosshair-h" style="top: 50%"></div>
+    <div class="crosshair-v" style="left: 50%"></div>
+
+    <!-- Candles -->
+    <div class="obs-candles">
+      @for (c of candles(); track $index) {
+        <div
+          class="obs-candle"
+          [class.obs-candle--bull]="c.type === 'bull'"
+          [class.obs-candle--bear]="c.type === 'bear'"
+          [style.height.%]="c.heightPct"
+          [style.margin-bottom.%]="c.bottomPct"
+        >
+          <div class="obs-candle__wick"></div>
+        </div>
+      }
+    </div>
+
+    <span class="obs-chart-scan" aria-hidden="true">SCANNING MODULE 04A // ACTIVE</span>
+  </div>
+
+  <!-- Action buttons -->
+  <div class="obs-chart-actions">
+    <button class="obs-btn" (click)="buy()" aria-label="Buy market order">BUY MKT</button>
+    <button class="obs-btn danger" (click)="sell()" aria-label="Sell market order">SELL MKT</button>
+  </div>
+</div>

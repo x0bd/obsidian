@@ -1,0 +1,67 @@
+<!-- RISK ENGINE -->
+<div class="obs-panel obs-risk" role="region" aria-label="Risk engine">
+  <div class="hazard-stripe" aria-hidden="true"></div>
+  <div class="obs-panel-header">
+    <span class="panel-label">Risk Engine</span>
+  </div>
+
+  <div class="obs-risk__body">
+    <!-- Margin Usage -->
+    <div class="obs-risk__metric">
+      <div class="obs-risk__metric-row">
+        <span class="text-dead">MARGIN USAGE</span>
+        <span class="font-mono" [style.color]="marginWarning() ? 'var(--burn)' : 'var(--text)'">{{
+          marginLabel()
+        }}</span>
+      </div>
+      <div
+        class="obs-progress-track"
+        role="progressbar"
+        [attr.aria-valuenow]="svc.marginPct()"
+        aria-valuemin="0"
+        aria-valuemax="100"
+      >
+        <div
+          class="obs-progress-fill"
+          [style.width]="marginLabel()"
+          [style.background]="marginWarning() ? 'var(--burn)' : 'var(--cyber)'"
+        ></div>
+      </div>
+    </div>
+
+    <!-- Leverage -->
+    <div class="obs-risk__metric">
+      <div class="obs-risk__metric-row">
+        <span class="text-dead">LEVERAGE</span>
+        <span class="font-mono text-cyber">10x</span>
+      </div>
+      <div
+        class="obs-progress-track"
+        role="progressbar"
+        aria-valuenow="25"
+        aria-valuemin="0"
+        aria-valuemax="100"
+      >
+        <div class="obs-progress-fill" style="width: 25%; background: var(--burn)"></div>
+      </div>
+    </div>
+
+    <!-- Divider -->
+    <div class="obs-risk__divider"></div>
+
+    <!-- Equity -->
+    <div class="obs-risk__equity">
+      <span class="text-dead">ACCOUNT EQUITY</span>
+      <span class="font-mono glow-cyber">{{ equityLabel() }}</span>
+    </div>
+
+    <!-- Volatility warning -->
+    <div class="obs-risk__footer">
+      @if (marginWarning()) {
+        <div class="vol-warning" role="alert">⚠ MARGIN WARNING</div>
+      } @else {
+        <div class="vol-warning" role="status">VOLATILITY WARNING</div>
+      }
+    </div>
+  </div>
+</div>

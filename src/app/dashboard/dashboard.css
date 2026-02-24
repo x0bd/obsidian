@@ -1,0 +1,88 @@
+/* ─── Terminal Root ─── */
+:host {
+  display: block;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.obs-terminal {
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+  position: relative;
+  background-color: var(--void);
+}
+
+/* ─── Layout Grid ───────────────────────────────────────────────
+   Columns: [left] 270px │ [centre] 1fr │ [right] 300px
+   Rows:    [topbar] 52px │ [main] 1fr │ [bottom] 210px │ [log] 140px
+──────────────────────────────────────────────────────────────── */
+.obs-grid {
+  display: grid;
+  grid-template-columns: 270px 1fr 300px;
+  grid-template-rows: 52px 1fr 210px 140px;
+  gap: 6px;
+  padding: 6px;
+  height: 100%;
+  width: 100%;
+}
+
+/* Row 1 */
+.obs-grid__topbar {
+  grid-column: 1 / -1;
+  grid-row: 1;
+}
+
+/* Rows 2-3: Left column */
+.obs-grid__market-watch {
+  grid-column: 1;
+  grid-row: 2 / 4;
+}
+
+/* Row 2: Centre */
+.obs-grid__chart {
+  grid-column: 2;
+  grid-row: 2;
+}
+
+/* Row 2: Right */
+.obs-grid__order-book {
+  grid-column: 3;
+  grid-row: 2;
+}
+
+/* Row 3: Centre */
+.obs-grid__positions {
+  grid-column: 2;
+  grid-row: 3;
+}
+
+/* Row 3: Right */
+.obs-grid__risk {
+  grid-column: 3;
+  grid-row: 3;
+}
+
+/* Row 4: Full width */
+.obs-grid__telemetry {
+  grid-column: 1 / -1;
+  grid-row: 4;
+}
+
+/* ─── Top Bar ───────────────────────────────────────────────── */
+obs-top-bar {
+  display: contents;
+}
+
+/* ─── Component display fixes ─── */
+obs-market-watch,
+obs-main-chart,
+obs-order-book,
+obs-positions-panel,
+obs-risk-engine,
+obs-telemetry-log {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  min-height: 0;
+}

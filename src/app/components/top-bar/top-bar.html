@@ -1,0 +1,47 @@
+<!-- TOP BAR -->
+<header class="obs-top-bar" role="banner">
+  <!-- Logo -->
+  <div class="obs-top-bar__logo" aria-label="Obsidian OS">
+    <span class="font-hud">OBSIDIAN</span><span class="text-cyber font-hud">.OS</span>
+  </div>
+
+  <div class="obs-top-bar__divider" aria-hidden="true"></div>
+
+  <!-- Live ticker tape -->
+  <nav class="obs-top-bar__ticker" aria-label="Live market prices">
+    @for (inst of svc.instruments(); track inst.symbol) {
+      <div class="obs-ticker-item">
+        <span class="obs-ticker-item__sym">{{ baseSymbol(inst.symbol) }}</span>
+        <span
+          class="obs-ticker-item__price"
+          [style.color]="inst.changePct >= 0 ? 'var(--cyber)' : 'var(--burn)'"
+          >{{ inst.price | number: '1.2-4' }}</span
+        >
+      </div>
+    }
+  </nav>
+
+  <div style="flex: 1"></div>
+
+  <!-- Latency / status -->
+  <div class="obs-top-bar__meta" aria-label="System status">
+    <span class="text-dead font-mono" style="font-size: 0.65rem">LATENCY: 4ms</span>
+
+    <!-- Light/Dark toggle -->
+    <button
+      class="obs-mode-btn"
+      (click)="toggleTheme()"
+      [attr.aria-label]="isLight() ? 'Switch to dark mode' : 'Switch to light mode'"
+    >
+      {{ isLight() ? '◑ DARK' : '◐ LIGHT' }}
+    </button>
+
+    <!-- Status dot -->
+    <div
+      class="obs-status-dot pulse-dot"
+      role="status"
+      aria-label="Feed connected"
+      title="Feed connected"
+    ></div>
+  </div>
+</header>

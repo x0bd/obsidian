@@ -1,0 +1,57 @@
+<!-- POSITIONS PANEL -->
+<div class="obs-panel obs-positions" role="region" aria-label="Open positions">
+  <div class="obs-panel-header">
+    <span class="panel-label">Open Positions</span>
+    <span class="font-mono" style="font-size: 0.7rem">
+      UNREALIZED PNL:&nbsp;
+      <span
+        [style.color]="totalPnlPositive() ? 'var(--cyber)' : 'var(--burn)'"
+        [style.text-shadow]="totalPnlPositive() ? 'var(--glow)' : 'var(--glow-burn)'"
+        >{{ totalPnlLabel() }}</span
+      >
+    </span>
+  </div>
+
+  <div class="obs-positions__table-wrap">
+    <table class="obs-table" aria-label="Open positions table">
+      <thead>
+        <tr>
+          <th scope="col">SYMBOL</th>
+          <th scope="col">SIZE</th>
+          <th scope="col">ENTRY</th>
+          <th scope="col">MARK</th>
+          <th scope="col">PNL</th>
+          <th scope="col">ACTION</th>
+        </tr>
+      </thead>
+      <tbody>
+        @for (pos of svc.positions(); track pos.id) {
+          <tr class="obs-table__row" [class.obs-table__row--active]="pos.pnlValue >= 0">
+            <td [style.color]="pos.pnlValue >= 0 ? 'var(--cyber)' : 'var(--text-dead)'">
+              {{ pos.symbol }}
+            </td>
+            <td>{{ pos.sizeLabel }}</td>
+            <td>{{ pos.entry | number: '1.2-4' }}</td>
+            <td>{{ pos.mark | number: '1.2-4' }}</td>
+            <td [style.color]="pos.pnlValue >= 0 ? 'var(--cyber)' : 'var(--burn)'">
+              {{ pnlLabel(pos.pnlValue) }}
+            </td>
+            <td>
+              <button
+                class="obs-close-btn"
+                (click)="close(pos.id)"
+                [attr.aria-label]="'Close position ' + pos.symbol"
+              >
+                CLOSE
+              </button>
+            </td>
+          </tr>
+        } @empty {
+          <tr>
+            <td colspan="6" class="obs-table__empty text-dead">NO OPEN POSITIONS</td>
+          </tr>
+        }
+      </tbody>
+    </table>
+  </div>
+</div>
